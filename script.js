@@ -1,182 +1,132 @@
-const movies = [
-  { id: 1, title: 'Duna: Parte II', year: 2024, duration: '2h 46m', genre: 'scifi', rating: '8.5',
-    desc: 'Paul Atreides se une aos Fremen para vingar sua família e evitar um futuro catastrófico.',
-    poster: 'https://image.tmdb.org/t/p/w500/8b8R8l88Qje9dn9OE8PY05Nxl1X.jpg',
-    banner: 'https://image.tmdb.org/t/p/original/628Dep6AxEtDxjZoGP78TsOxYbK.jpg',
-    trending: true, popular: true },
-  { id: 2, title: 'Oppenheimer', year: 2023, duration: '3h 0m', genre: 'drama', rating: '8.9',
-    desc: 'A história do físico J. Robert Oppenheimer e o desenvolvimento da bomba atômica.',
-    poster: 'https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg',
-    banner: 'https://image.tmdb.org/t/p/original/rLb2cwF3Pazuxaj0sRXQ037tGI1.jpg',
-    trending: true, popular: true },
-  { id: 3, title: 'Barbie', year: 2023, duration: '1h 54m', genre: 'comedia', rating: '7.0',
-    desc: 'Barbie viaja ao mundo real e descobre o que significa ser humana.',
-    poster: 'https://image.tmdb.org/t/p/w500/iuFNMS8vlbZxOkIGEV7HKKDTgPZ.jpg',
-    banner: 'https://image.tmdb.org/t/p/original/nHf61UzkfFno5X1ofIjkjHCWTZb.jpg',
-    trending: true, popular: true },
-  { id: 4, title: 'Poor Things', year: 2023, duration: '2h 21m', genre: 'drama', rating: '8.0',
-    desc: 'Uma jovem ressuscitada por um cirurgião excêntrico explora o mundo com olhos frescos.',
-    poster: 'https://image.tmdb.org/t/p/w500/kCGlIMHnOm8JPXIf6rqK8QiL7r4.jpg',
-    banner: 'https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg',
-    trending: true, popular: true },
-  { id: 5, title: 'Alien: Romulus', year: 2024, duration: '1h 59m', genre: 'terror', rating: '7.2',
-    desc: 'Um grupo de jovens colonizadores enfrenta a forma de vida mais aterrorizante do universo.',
-    poster: 'https://image.tmdb.org/t/p/w500/b33nnKl1GSFbao4l3fZDDqsMx0F.jpg',
-    banner: 'https://image.tmdb.org/t/p/original/9f5S7nNFsBiMVfDfHTLa68jqnKG.jpg',
-    popular: true },
-  { id: 6, title: 'Furiosa', year: 2024, duration: '2h 28m', genre: 'acao', rating: '7.8',
-    desc: 'A origem da lendária guerreira Mad Max em uma saga épica de sobrevivência.',
-    poster: 'https://image.tmdb.org/t/p/w500/iADOJ8Zymht2JPMoy3R7xceZprc.jpg',
-    banner: 'https://image.tmdb.org/t/p/original/xg27NrXi7VXCGUr7MG75UqLl21M.jpg',
-    popular: true },
-  { id: 7, title: 'Deadpool & Wolverine', year: 2024, duration: '2h 7m', genre: 'acao', rating: '7.9',
-    desc: 'Deadpool recruta Wolverine em uma missão de última hora que muda tudo.',
-    poster: 'https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg',
-    banner: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg',
-    popular: true },
-  { id: 8, title: 'Gladiador II', year: 2024, duration: '2h 28m', genre: 'acao', rating: '6.8',
-    desc: 'Décadas após a queda de Maximus, Lucius busca seu destino na arena de Roma.',
-    poster: 'https://image.tmdb.org/t/p/w500/f2cTzBqQoqSIJECdbbCIDDvZFioc.jpg',
-    banner: 'https://image.tmdb.org/t/p/original/tkpjn1Oszmj3stoEilsiHz1YKEJ.jpg',
-    popular: true },
-  { id: 9, title: 'Matrix', year: 1999, duration: '2h 16m', genre: 'scifi', rating: '8.7',
-    desc: 'Um hacker descobre a verdade sobre a realidade e seu papel na guerra contra as máquinas.',
-    poster: 'https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg',
-    banner: 'https://image.tmdb.org/t/p/original/6q0RnwhvIzconfbGTurkHjl5qri.jpg',
-    classic: true },
-  { id: 10, title: 'O Poderoso Chefão', year: 1972, duration: '2h 55m', genre: 'drama', rating: '9.2',
-    desc: 'A história da família mafiosa Corleone e a transferência de poder.',
-    poster: 'https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsLashi7tk0Et.jpg',
-    banner: 'https://image.tmdb.org/t/p/original/tmU7GeKVybMWFbwxFpGFP1KXrq.jpg',
-    classic: true },
-  { id: 11, title: 'Clube da Luta', year: 1999, duration: '2h 19m', genre: 'drama', rating: '8.8',
-    desc: 'Um insone conhece um vendedor de sabão e juntos formam um clube clandestino de luta.',
-    poster: 'https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg',
-    banner: 'https://image.tmdb.org/t/p/original/rr7E0NoGKxvbkb89eR1GwfoYjpA.jpg',
-    classic: true },
-  { id: 12, title: 'Pulp Fiction', year: 1994, duration: '2h 34m', genre: 'drama', rating: '8.9',
-    desc: 'Histórias entrecortadas de crime, violência e redenção em Los Angeles.',
-    poster: 'https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg',
-    banner: 'https://image.tmdb.org/t/p/original/suaEOmZDnupd7g4e6aZPGf2iMaX.jpg',
-    classic: true }
+const filmes = [
+    { title: "Venom: Tempo de Carnificina", desc: "Eddie Brock e Venom enfrentam o serial killer Cletus Kasady, que se torna o terrível Carnificina.", poster: "https://br.web.img3.acsta.net/c_310_420/pictures/21/05/10/15/32/2425639.png", trailer: "https://www.youtube.com/watch?v=K1TloEu4EXA" },
+    { title: "Homem de Ferro 3", desc: "Tony Stark enfrenta sua maior crise pessoal após o ataque de Nova York e um inimigo misterioso chamado Mandarin.", poster: "https://upload.wikimedia.org/wikipedia/pt/1/19/Iron_Man_3_poster.jpg", trailer: "https://www.youtube.com/watch?v=igfXmU1r_mc" },
+    { title: "Até o Último Homem", desc: "A história real de Desmond Doss, um médico que salvou 75 homens na Segunda Guerra sem disparar um único tiro.", poster: "https://br.web.img3.acsta.net/pictures/16/11/21/15/29/457312.jpg", trailer: "https://www.youtube.com/watch?v=KHZG7NnjVxM" },
+    { title: "Círculo de Fogo", desc: "Em um futuro próximo, gigantescas criaturas marinhas surgem e a humanidade cria robôs gigantes para combatê-las.", poster: "https://upload.wikimedia.org/wikipedia/pt/f/f3/Pacific_Rim_FilmPoster.jpeg", trailer: "https://www.youtube.com/watch?v=R7J3RJcxv58" }
 ];
 
-const genreNames = {
-  all: 'Todos',
-  acao: 'Ação',
-  drama: 'Drama',
-  comedia: 'Comédia',
-  terror: 'Terror',
-  scifi: 'Sci-Fi',
-  animacao: 'Animação',
-  romance: 'Romance'
-};
+let currentIndex = 0;
+let interval;
 
-const popularMovies = movies.filter(movie => movie.popular);
-let currentGenre = 'all';
-const searchInput = document.getElementById('searchInput');
+const hero = document.getElementById('hero');
+const heroTitle = document.getElementById('hero-title');
+const heroDesc = document.getElementById('hero-desc');
+const heroBtn = document.getElementById('hero-btn');
+const dotsContainer = document.getElementById('hero-dots');
+const cardsContainer = document.getElementById('cards-container');
 
-function createCard(movie, delay = 0) {
-  const card = document.createElement('div');
-  card.className = 'movie-card';
-  card.style.animationDelay = `${delay}ms`;
-  card.innerHTML = `
-    <img class="movie-poster" src="${movie.poster}" alt="${movie.title}" loading="lazy" />
-    <div class="movie-badge">★ ${movie.rating}</div>
-    <div class="movie-overlay">
-      <div class="movie-play">
-        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
-      </div>
-    </div>
-    <div class="movie-info">
-      <div class="movie-title">${movie.title}</div>
-      <div class="movie-year">${movie.year} · ${movie.duration}</div>
-    </div>`;
-  card.addEventListener('click', () => openModal(movie));
-  return card;
+function updateHero() {
+    hero.style.backgroundImage = `url('${filmes[currentIndex].poster}')`;
+    heroTitle.textContent = filmes[currentIndex].title;
+    heroDesc.textContent = filmes[currentIndex].desc;
+    heroBtn.onclick = () => window.open(filmes[currentIndex].trailer, '_blank');
 }
 
-function renderSection(containerId, list) {
-  const container = document.getElementById(containerId);
-  container.innerHTML = '';
-  list.forEach((movie, index) => container.appendChild(createCard(movie, index * 60)));
+function createDots() {
+    dotsContainer.innerHTML = '';
+    filmes.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.onclick = () => { currentIndex = i; updateHero(); updateDots(); resetInterval(); };
+        dotsContainer.appendChild(dot);
+    });
 }
 
-function getGenreLabel(genreKey) {
-  return genreNames[genreKey] || genreKey;
+function updateDots() {
+    Array.from(dotsContainer.children).forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
 }
 
-function getFilteredPopularMovies() {
-  let filtered = currentGenre === 'all'
-    ? popularMovies
-    : popularMovies.filter(movie => movie.genre === currentGenre);
-
-  const query = searchInput.value.trim().toLowerCase();
-  if (query) {
-    filtered = filtered.filter(movie => movie.title.toLowerCase().includes(query) || getGenreLabel(movie.genre).toLowerCase().includes(query));
-  }
-
-  return filtered;
+function nextSlide() {
+    currentIndex = (currentIndex + 1) % filmes.length;
+    updateHero();
+    updateDots();
 }
 
-function updatePopularGrid() {
-  const filtered = getFilteredPopularMovies();
-  renderSection('popularGrid', filtered.length ? filtered : popularMovies);
+function resetInterval() {
+    clearInterval(interval);
+    interval = setInterval(nextSlide, 5000);
 }
 
-function openModal(movie) {
-  document.getElementById('modalBanner').src = movie.banner;
-  document.getElementById('modalTitle').textContent = movie.title;
-  document.getElementById('modalRating').textContent = `★ ${movie.rating}`;
-  document.getElementById('modalYear').textContent = movie.year;
-  document.getElementById('modalDuration').textContent = movie.duration;
-  document.getElementById('modalGenre').textContent = getGenreLabel(movie.genre);
-  document.getElementById('modalDesc').textContent = movie.desc;
-  document.getElementById('modalOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
+function createCards() {
+    cardsContainer.innerHTML = '';
+    filmes.forEach((filme, index) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+            <img src="${filme.poster}" alt="${filme.title}">
+            <div style="padding:18px 16px; text-align:center;">
+                <h3 style="font-size:1.28rem; margin-bottom:6px;">${filme.title}</h3>
+                <p style="font-size:0.95rem; color:#a3b8d9;">${filme.desc.substring(0, 85)}...</p>
+            </div>
+        `;
+        card.onclick = () => flyCardToCenter(card, index);
+        cardsContainer.appendChild(card);
+    });
 }
 
-function closeModal(event) {
-  if (event.target.id === 'modalOverlay') {
-    closeModalDirect();
-  }
+// Animação: Card voa para o centro → quando chega na metade, abre o modal
+function flyCardToCenter(cardElement, index) {
+    const rect = cardElement.getBoundingClientRect();
+    const startX = rect.left + rect.width / 2;
+    const startY = rect.top + rect.height / 2;
+
+    // Prepara o card para voar
+    cardElement.style.position = 'fixed';
+    cardElement.style.top = rect.top + 'px';
+    cardElement.style.left = rect.left + 'px';
+    cardElement.style.width = rect.width + 'px';
+    cardElement.style.height = rect.height + 'px';
+    cardElement.style.zIndex = '1500';
+    cardElement.style.transition = 'none';
+
+    void cardElement.offsetWidth;
+
+    // Inicia o voo para o centro
+    cardElement.style.transition = 'all 0.9s cubic-bezier(0.25, 0.1, 0.25, 1)';
+    cardElement.style.top = '50%';
+    cardElement.style.left = '50%';
+    cardElement.style.transform = 'translate(-50%, -50%) scale(1.8)';
+
+    // Quando estiver na metade do caminho (aprox. 450ms), abre o modal
+    setTimeout(() => {
+        openModal(index);
+    }, 450);
+
+    // Depois de terminar a animação, remove o card voador
+    setTimeout(() => {
+        cardElement.style.transition = 'all 0.4s ease';
+        cardElement.style.opacity = '0';
+        setTimeout(() => {
+            cardElement.remove();
+        }, 400);
+    }, 950);
 }
 
-function closeModalDirect() {
-  document.getElementById('modalOverlay').classList.remove('open');
-  document.body.style.overflow = '';
+function openModal(index) {
+    const f = filmes[index];
+    document.getElementById('modal-title').textContent = f.title;
+    document.getElementById('modal-desc').textContent = f.desc;
+    document.getElementById('modal-poster').src = f.poster;
+    document.getElementById('trailer-btn-modal').onclick = () => window.open(f.trailer, '_blank');
+    
+    const modal = document.getElementById('modal');
+    modal.style.display = 'flex';
+    setTimeout(() => modal.classList.add('show'), 80);
 }
 
-function handleGenreClick(event) {
-  const pill = event.target.closest('.genre-pill');
-  if (!pill) return;
-
-  currentGenre = pill.dataset.genre;
-  document.querySelectorAll('.genre-pill').forEach(button => button.classList.toggle('active', button === pill));
-  updatePopularGrid();
+function closeModal() {
+    const modal = document.getElementById('modal');
+    modal.classList.remove('show');
+    setTimeout(() => modal.style.display = 'none', 400);
 }
 
-function handleNavLinkClick(event) {
-  const link = event.target.closest('.nav-links a');
-  if (!link) return;
+// Inicializar
+createDots();
+createCards();
+updateHero();
+updateDots();
+interval = setInterval(nextSlide, 5000);
 
-  document.querySelectorAll('.nav-links a').forEach(anchor => anchor.classList.remove('active'));
-  link.classList.add('active');
-}
-
-function init() {
-  renderSection('trendingRow', movies.filter(movie => movie.trending));
-  renderSection('classicsRow', movies.filter(movie => movie.classic));
-  updatePopularGrid();
-
-  document.getElementById('genres').addEventListener('click', handleGenreClick);
-  document.querySelector('.nav-links').addEventListener('click', handleNavLinkClick);
-  searchInput.addEventListener('input', updatePopularGrid);
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') {
-      closeModalDirect();
-    }
-  });
-}
-
-window.addEventListener('DOMContentLoaded', init);
+document.addEventListener('keydown', e => { if (e.key === "Escape") closeModal(); });
+document.getElementById('modal').addEventListener('click', e => {
+    if (e.target.id === 'modal') closeModal();
+});

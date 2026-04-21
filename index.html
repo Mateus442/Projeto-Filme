@@ -1,130 +1,56 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CineVault</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AbacateFilmes</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="logo">Cine<span>Vault</span></div>
-  <ul class="nav-links">
-    <li><a href="#" class="active">Início</a></li>
-    <li><a href="#trending">Em Alta</a></li>
-    <li><a href="#popular">Populares</a></li>
-    <li><a href="#classics">Clássicos</a></li>
-  </ul>
-  <div class="nav-search">
-    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-      <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
-    </svg>
-    <input type="text" placeholder="Buscar filmes..." id="searchInput" />
-  </div>
-</nav>
+    <header>
+        <div class="logo">AbacateFilmes</div>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="contato.html">Contato</a>
+        </nav>
+    </header>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <span class="hero-tag">⭐ Destaque da Semana</span>
-    <h1 class="hero-title">Duna:<br>Parte II</h1>
-    <div class="hero-meta">
-      <span class="rating">★ 8.5</span>
-      <span>2024</span>
-      <span>•</span>
-      <span>2h 46m</span>
-      <span>•</span>
-      <span>Sci-Fi / Aventura</span>
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1 id="hero-title">VENOM: TEMPO DE CARNIFICINA</h1>
+            <p id="hero-desc">Eddie Brock e Venom enfrentam o serial killer Cletus Kasady, que se torna o terrível Carnificina.</p>
+            <button id="hero-btn" class="hero-btn">▶ Assistir trailer</button>
+        </div>
+        <div class="hero-dots" id="hero-dots"></div>
+    </section>
+
+    <section class="vitrine">
+        <h2>🥑 Meus filmes favoritos</h2>
+        <div class="cards-container" id="cards-container"></div>
+    </section>
+
+    <!-- MODAL --><!-- MODAL -->
+    <div id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title"></h2>
+                <span class="close-btn" onclick="closeModal()">×</span>
+            </div>
+            <div class="modal-body">
+                <img id="modal-poster" class="modal-poster" src="" alt="">
+                <div style="flex:1">
+                    <p id="modal-desc" style="font-size:1.18rem; line-height:1.8; color:#c5d6f0; margin-bottom:25px;"></p>
+                    <button id="trailer-btn-modal" class="play-btn">▶ Assistir trailer agora</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <p class="hero-desc">Paul Atreides se une aos Fremen e inicia uma jornada espiritual e de guerra para vingar sua família enquanto tenta evitar o terrível futuro que apenas ele pode prever.</p>
-    <div class="hero-btns">
-      <button class="btn btn-primary" onclick="openModal(movies[0])">
-        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z" /></svg>
-        Assistir Agora
-      </button>
-      <button type="button" class="btn btn-ghost">+ Minha Lista</button>
-    </div>
-  </div>
-</div>
 
-<!-- GENRES -->
-<div class="genres" id="genres">
-  <button class="genre-pill active" data-genre="all">Todos</button>
-  <button class="genre-pill" data-genre="acao">Ação</button>
-  <button class="genre-pill" data-genre="drama">Drama</button>
-  <button class="genre-pill" data-genre="comedia">Comédia</button>
-  <button class="genre-pill" data-genre="terror">Terror</button>
-  <button class="genre-pill" data-genre="scifi">Sci-Fi</button>
-  <button class="genre-pill" data-genre="animacao">Animação</button>
-  <button class="genre-pill" data-genre="romance">Romance</button>
-</div>
+    <footer>
+        © 2026 AbacateFilmes • Feito com 🥑 e muito amor • Versão para o Mateus
+    </footer>
 
-<!-- TRENDING -->
-<section id="trending">
-  <div class="section-header">
-    <h2 class="section-title">🔥 Em Alta</h2>
-    <span class="section-link">Ver todos →</span>
-  </div>
-  <div class="scroll-row" id="trendingRow"></div>
-</section>
-
-<!-- POPULAR -->
-<section id="popular" style="background: linear-gradient(to bottom, transparent, rgba(17,17,24,.8));">
-  <div class="section-header">
-    <h2 class="section-title">🎬 Populares</h2>
-    <span class="section-link">Ver todos →</span>
-  </div>
-  <div class="movie-grid" id="popularGrid"></div>
-</section>
-
-<!-- CLASSICS -->
-<section id="classics">
-  <div class="section-header">
-    <h2 class="section-title">🏆 Clássicos</h2>
-    <span class="section-link">Ver todos →</span>
-  </div>
-  <div class="scroll-row" id="classicsRow"></div>
-</section>
-
-<!-- MODAL -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-  <div class="modal">
-    <img id="modalBanner" class="modal-banner" src="" alt="Banner do filme" />
-    <div class="modal-body">
-      <div class="modal-header">
-        <h2 class="modal-title" id="modalTitle"></h2>
-        <button type="button" class="modal-close" onclick="closeModalDirect()">✕</button>
-      </div>
-      <div class="modal-meta">
-        <span class="rating" id="modalRating"></span>
-        <span id="modalYear"></span>
-        <span>•</span>
-        <span id="modalDuration"></span>
-        <span>•</span>
-        <span id="modalGenre"></span>
-      </div>
-      <p class="modal-desc" id="modalDesc"></p>
-      <div class="modal-actions">
-        <button type="button" class="btn btn-primary">
-          <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z" /></svg>
-          Assistir
-        </button>
-        <button type="button" class="btn btn-ghost">+ Minha Lista</button>
-        <button type="button" class="btn btn-ghost">Compartilhar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer>
-  Feito por Mateus Dias Nascimento · <span>CineVault</span> © 2026 · Todos os direitos reservados
-</footer>
-
-<script defer src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
