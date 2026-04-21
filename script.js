@@ -116,7 +116,10 @@ function openModal(index) {
 function closeModal() {
     const modal = document.getElementById('modal');
     modal.classList.remove('show');
-    setTimeout(() => modal.style.display = 'none', 400);
+    setTimeout(() => {
+        modal.style.display = 'none';
+        createCards(); // Recreate cards after modal closes
+    }, 400);
 }
 
 // Inicializar
